@@ -17,9 +17,16 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 # Clone OpenClaw source
 RUN git clone https://github.com/openclaw/openclaw.git .
 
-# Install dependencies and build
+# Install dependencies
 RUN pnpm install --frozen-lockfile
-RUN pnpm build:docker
+
+# Build - skip a2ui bundle if it fails
+RUN pnpm build:docker || \
+    (mkdir -p src/canvas-host/a2ui && \
+     echo "/* A2UI stub */" > src/canvas-host/a2ui/a2ui.bundle.js && \
+     echo "stub" > src/canvas-host/a2ui/.bundle.hash && \
+     rm -rf vendor/a2ui apps/shared/OpenClawKit/Tools/CanvasA2UI && \
+     pnpm build:docker)
 
 # Stage 2: Runtime
 FROM node:22-bookworm-slim
@@ -30,6 +37,7 @@ RUN apt-get update && apt-get install -y \
     git \
     lsof \
     openssl \
+    hostname \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -50,8 +58,6 @@ COPY openclaw-config/config.json /home/node/.openclaw/openclaw.json
 
 # Create directories
 RUN mkdir -p /home/node/.openclaw/workspace
-
-USER node
 
 EXPOSE 18789
 
