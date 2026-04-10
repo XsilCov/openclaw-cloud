@@ -30,8 +30,7 @@ RUN apt-get update && apt-get install -y \
     git \
     lsof \
     openssl \
-    && rm -rf /var/lib/apt/lists/* \
-    && useradd -m -s /bin/bash node
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
