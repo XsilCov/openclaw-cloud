@@ -1,0 +1,18 @@
+services:
+  openclaw:
+    image: openclaw/openclaw:latest
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    environment:
+      - OPENCLAW_GATEWAY_PORT=18789
+      - OPENCLAW_GATEWAY_BIND=lan
+      - OPENCLAW_ALLOW_INSECURE_PRIVATE_WS=true
+    volumes:
+      - ./data:/home/node/.openclaw
+      - ./workspace:/home/node/.openclaw/workspace
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:18789/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

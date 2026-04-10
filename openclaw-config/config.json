@@ -1,0 +1,195 @@
+{
+  "gateway": {
+    "auth": {
+      "mode": "token",
+      "token": "REPLACE_WITH_YOUR_TOKEN"
+    },
+    "mode": "local",
+    "port": 18789,
+    "bind": "loopback",
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "controlUi": {
+      "allowInsecureAuth": true
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-04-10T09:50:04.693Z",
+    "lastRunVersion": "2026.4.9",
+    "lastRunCommand": "onboard",
+    "lastRunMode": "local"
+  },
+  "meta": {
+    "lastTouchedVersion": "2026.4.9",
+    "lastTouchedAt": "2026-04-10T11:00:39.419Z"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "/home/xxx/.openclaw/workspace",
+      "models": {
+        "google-gemini-cli/gemini-3.1-pro-preview": {},
+        "ollama/llama3.2:latest": {},
+        "ollama/qwen3.5:0.8b": {},
+        "ollama/gemma4:latest": {}
+      },
+      "model": {
+        "primary": "google-gemini-cli/gemini-3.1-pro-preview"
+      },
+      "mediaGenerationAutoProviderFallback": true,
+      "skipBootstrap": false,
+      "memorySearch": {
+        "enabled": false
+      }
+    }
+  },
+  "channels": {
+    "whatsapp": {
+      "enabled": true
+    },
+    "telegram": {
+      "enabled": true,
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      },
+      "botToken": "REPLACE_WITH_YOUR_BOT_TOKEN",
+      "dmPolicy": "allowall",
+      "configWrites": true,
+      "linkPreview": true,
+      "streaming": true
+    },
+    "bluebubbles": {
+      "blockStreaming": true,
+      "enabled": true,
+      "sendReadReceipts": true,
+      "enrichGroupParticipantsFromContacts": true
+    },
+    "discord": {
+      "ackReactionScope": "all",
+      "configWrites": true,
+      "dangerouslyAllowNameMatching": true,
+      "enabled": true,
+      "groupPolicy": "allowlist"
+    }
+  },
+  "session": {
+    "dmScope": "per-channel-peer"
+  },
+  "tools": {
+    "profile": "coding",
+    "web": {
+      "search": {
+        "provider": "gemini",
+        "enabled": true
+      }
+    },
+    "links": {
+      "enabled": true
+    },
+    "loopDetection": {
+      "enabled": true
+    },
+    "message": {
+      "crossContext": {
+        "allowWithinProvider": true,
+        "allowAcrossProviders": true
+      }
+    },
+    "agentToAgent": {
+      "enabled": true
+    },
+    "elevated": {
+      "enabled": true
+    },
+    "exec": {
+      "strictInlineEval": true,
+      "notifyOnExit": true,
+      "notifyOnExitEmptySuccess": true
+    },
+    "fs": {
+      "workspaceOnly": true
+    },
+    "experimental": {
+      "planTool": true
+    }
+  },
+  "auth": {
+    "profiles": {
+      "google-gemini-cli:xsilofon@gmail.com": {
+        "provider": "google-gemini-cli",
+        "mode": "oauth",
+        "email": "xsilofon@gmail.com"
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "google": {
+        "enabled": true,
+        "config": {
+          "webSearch": {
+            "apiKey": "REPLACE_WITH_YOUR_API_KEY"
+          }
+        }
+      }
+    }
+  },
+  "skills": {
+    "entries": {
+      "goplaces": {
+        "apiKey": "REPLACE_WITH_YOUR_API_KEY"
+      }
+    }
+  },
+  "env": {
+    "shellEnv": {
+      "enabled": true
+    }
+  },
+  "diagnostics": {
+    "enabled": true,
+    "otel": {
+      "enabled": true,
+      "traces": true,
+      "metrics": true,
+      "logs": true
+    },
+    "cacheTrace": {
+      "enabled": true,
+      "includeMessages": true,
+      "includePrompt": true,
+      "includeSystem": true
+    }
+  },
+  "update": {
+    "checkOnStart": true,
+    "auto": {
+      "enabled": true
+    }
+  },
+  "memory": {
+    "qmd": {
+      "searchTool": "hybrid_search",
+      "includeDefaultMemory": true,
+      "command": "qmd"
+    },
+    "citations": "auto"
+  },
+  "messages": {
+    "ackReactionScope": "all"
+  },
+  "cron": {
+    "enabled": true,
+    "failureAlert": {
+      "enabled": true
+    }
+  },
+  "approvals": {
+    "plugin": {
+      "enabled": true
+    }
+  }
+}
